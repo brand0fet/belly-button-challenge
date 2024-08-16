@@ -15,7 +15,8 @@ function buildMetadata(sample) {
     // Use `.html("")` to clear any existing metadata
     demopanel.html('');
 
-    // Inside a loop, append new tags for each key-value in the filtered metadata
+    // Inside a loop, append new tags for each key-value in the filtered metadata 
+    // xpert used here was having a hard time
     if (result) {
       Object.entries(result).forEach(([key, value]) => {
         demopanel.append('h6').text(`${key.toUpperCase()}: ${value}`);
@@ -63,6 +64,7 @@ function buildCharts(sample) {
     Plotly.newPlot('bubble', bubbleChart, bubbleRender);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
+    //xpert used here
     let yticks = otu_ids.slice(0, 10).map(otuId => `OTU ${otuId}`).reverse();
 
     // Build a Bar Chart
@@ -73,9 +75,13 @@ function buildCharts(sample) {
       type: 'bar',
       orientation: 'h'
     }];
+    let barLay = {
+      title: 'Top 10 Bacteria Cultures Found',
+      xaxis: {title: 'Number of Bacteria'}
+    };
 
     // Render the Bar Chart
-    Plotly.newPlot('bar', barData);
+    Plotly.newPlot('bar', barData, barLay);
 
   });
 }
